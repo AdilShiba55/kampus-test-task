@@ -5,6 +5,7 @@ import com.example.kampustesttask.exception.RecordNotFoundException;
 import com.example.kampustesttask.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserService {
@@ -16,6 +17,7 @@ public class UserService {
         userRepository.save(user);
     }
 
+    @Transactional
     public void setTelegram(Long userId, String telegram) {
         userRepository.setTelegram(userId, telegram);
     }
