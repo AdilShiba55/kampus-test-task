@@ -1,0 +1,21 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5430/kampus-test-task
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+    show-sql: true
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 29617503142-1r4junhf1v46vk4t5r2p52ikrj8pilae.apps.googleusercontent.com
+            client-secret: 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
