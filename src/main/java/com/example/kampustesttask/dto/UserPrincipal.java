@@ -15,7 +15,6 @@ public class UserPrincipal implements OidcUser {
 
     private String token;
     private Long id;
-    private Boolean isEmailVerified;
     private String name;
     private String email;
 

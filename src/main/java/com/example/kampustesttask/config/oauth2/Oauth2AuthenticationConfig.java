@@ -1,4 +1,4 @@
-package com.example.kampustesttask.config;
+package com.example.kampustesttask.config.oauth2;
 
 import com.example.kampustesttask.dto.UserPrincipal;
 import com.example.kampustesttask.entity.User;
@@ -25,13 +25,6 @@ public class Oauth2AuthenticationConfig extends SavedRequestAwareAuthenticationS
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
         UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
-        String email = userPrincipal.getEmail();
-        if(!userService.existsByEmail(email)) {
-            User user = new User();
-            user.setEmail(email);
-            user.setDtCreate(OffsetDateTime.now());
-            userService.save(user);
-        }
         super.onAuthenticationSuccess(request, response, authentication);
     }
 }

@@ -24,26 +24,12 @@ spring:
           google:
             client-id: 29617503142-1r4junhf1v46vk4t5r2p52ikrj8pilae.apps.googleusercontent.com
             client-secret: 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
-          facebook:
-            client-id: 796534311952835
-            client-secret: 7601906a986e13406e32515844a2a2f2
-  quartz:
-    job-store-type: jdbc
-    jdbc:
-      initialize-schema: always
-    properties:
-      org:
-        quartz:
-          scheduler:
-            instanceId: AUTO
-            instanceName: myQuartzScheduler
-          jobStore:
-            useProperties: true
-            dataSource: quartzDataSource
-          dataSource.quartzDataSource:
-            driver: org.postgresql.Driver
-            url: jdbc:postgresql://localhost:5430/kampus-test-task
-            username: postgres
-            password: postgres
-            provider: hikaricp
+          github:
+            client-id: ec90ca6e817205a0772e
+            client-secret: 3ff47cd100a0e60a7b12aada38bae7ab5957f40b
+            scope:
+              - user:email
+#          facebook:
+#            client-id: 796534311952835
+#            client-secret: 7601906a986e13406e32515844a2a2f2
 

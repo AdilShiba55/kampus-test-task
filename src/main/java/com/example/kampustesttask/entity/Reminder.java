@@ -24,7 +24,8 @@ public class Reminder {
     @Column(name = "dt_remind")
     private OffsetDateTime dtReminder;
 
-    @Column(name = "user_id")
-    private Long userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }

@@ -29,6 +29,12 @@ class ReminderServiceTest {
     }
 
     @Test
+    void getById() {
+        Reminder reminder = reminderService.getById(UtTest.TEST_REMINDER_ID);
+        Assertions.assertNotNull(reminder.getId());
+    }
+
+    @Test
     void deleteById() {
         Assertions.assertDoesNotThrow(() -> reminderService.deleteById(UtTest.TEST_REMINDER_ID));
     }

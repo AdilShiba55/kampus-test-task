@@ -1,6 +1,7 @@
 package com.example.kampustesttask.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.kampustesttask.config.oauth2.OAuth2UserConfig;
+import com.example.kampustesttask.config.oauth2.OidcUserConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,8 +14,13 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SecurityConfig {
 
-    @Autowired
-    private Oauth2AuthenticationConfig oauth2Config;
+    private OidcUserConfig oidcUserConfig;
+    private OAuth2UserConfig oAuth2UserConfig;
+
+    public SecurityConfig(OidcUserConfig oidcUserConfig, OAuth2UserConfig oAuth2UserConfig) {
+        this.oidcUserConfig = oidcUserConfig;
+        this.oAuth2UserConfig = oAuth2UserConfig;
+    }
 
     @Bean
     public PasswordEncoder encoder() {
@@ -27,8 +33,9 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .anyRequest().authenticated()
                 .and()
-                .oauth2Login()
-                .successHandler(oauth2Config);
+                .oauth2Login(oc -> oc.userInfoEndpoint(ui -> ui
+                        .oidcUserService(oidcUserConfig)
+                        .userService(oAuth2UserConfig)));
 
         return http.build();
     }
