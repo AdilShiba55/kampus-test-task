@@ -27,3 +27,23 @@ spring:
           facebook:
             client-id: 796534311952835
             client-secret: 7601906a986e13406e32515844a2a2f2
+  quartz:
+    job-store-type: jdbc
+    jdbc:
+      initialize-schema: always
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceId: AUTO
+            instanceName: myQuartzScheduler
+          jobStore:
+            useProperties: true
+            dataSource: quartzDataSource
+          dataSource.quartzDataSource:
+            driver: org.postgresql.Driver
+            url: jdbc:postgresql://localhost:5430/kampus-test-task
+            username: postgres
+            password: postgres
+            provider: hikaricp
+
