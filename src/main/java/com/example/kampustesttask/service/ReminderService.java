@@ -11,13 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ReminderService {
 
+    @Autowired
     private ReminderRepository reminderRepository;
-    private UserService userService;
-
-    public ReminderService(ReminderRepository reminderRepository, UserService userService) {
-        this.reminderRepository = reminderRepository;
-        this.userService = userService;
-    }
 
     @Transactional
     public Reminder save(ReminderSaveDTO reminderSaveDTO, Long userId) {

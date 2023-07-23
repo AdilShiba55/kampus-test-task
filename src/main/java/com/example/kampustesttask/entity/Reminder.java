@@ -21,7 +21,7 @@ public class Reminder {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "dt_reminder")
+    @Column(name = "dt_remind")
     private OffsetDateTime dtReminder;
 
     @Column(name = "user_id")
