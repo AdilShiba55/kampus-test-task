@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 // обрабатываем исключения только из контроллеров, помеченных @CustomExceptionHandler
@@ -16,12 +17,12 @@ import java.util.stream.Collectors;
 public class ControllerExceptionHandlerAdvice {
 
     @ExceptionHandler(CustomException.class)
-    public ResponseEntity<?> handleCustomException(Exception exception) {
+    public ResponseEntity<Map<String, List<String>>> handleCustomException(Exception exception) {
         return ResponseEntity.badRequest().body(UtError.getMap(exception.getMessage()));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<?> handleValidationErrors(MethodArgumentNotValidException exception) {
+    public ResponseEntity<Map<String, List<String>>> handleValidationErrors(MethodArgumentNotValidException exception) {
         List<String> errors = exception.getBindingResult()
                 .getFieldErrors()
                 .stream()

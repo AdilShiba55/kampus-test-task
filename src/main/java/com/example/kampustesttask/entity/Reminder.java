@@ -22,7 +22,7 @@ public class Reminder {
     private String description;
 
     @Column(name = "dt_remind")
-    private OffsetDateTime dtReminder;
+    private OffsetDateTime dtRemind;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

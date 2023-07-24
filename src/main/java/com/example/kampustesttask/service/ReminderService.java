@@ -32,7 +32,7 @@ public class ReminderService {
         reminder.setId(reminderSaveDTO.getId());
         reminder.setTitle(reminderSaveDTO.getTitle());
         reminder.setDescription(reminderSaveDTO.getDescription());
-        reminder.setDtReminder(reminderSaveDTO.getDtReminder());
+        reminder.setDtRemind(reminderSaveDTO.getDtRemind());
         reminder.setUser(user);
         reminderRepository.save(reminder);
         return reminder;

@@ -14,6 +14,6 @@ public class ReminderSaveDTO {
     private String title;
     private String description;
     @NotNull
-    private OffsetDateTime dtReminder;
+    private OffsetDateTime dtRemind;
 
 }

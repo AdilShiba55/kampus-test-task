@@ -43,8 +43,8 @@ class ReminderServiceTest {
         ReminderSaveDTO reminderSaveDTO = new ReminderSaveDTO();
         reminderSaveDTO.setTitle("test title");
         reminderSaveDTO.setDescription("test description");
-        OffsetDateTime dtReminder = OffsetDateTime.now().plusHours(1L);
-        reminderSaveDTO.setDtReminder(dtReminder);
+        OffsetDateTime dtRemind = OffsetDateTime.now().plusHours(1L);
+        reminderSaveDTO.setDtRemind(dtRemind);
         return reminderSaveDTO;
     }
 }

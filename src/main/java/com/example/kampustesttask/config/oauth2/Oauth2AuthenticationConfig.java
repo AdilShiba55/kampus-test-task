@@ -17,14 +17,9 @@ import java.time.OffsetDateTime;
 @Configuration
 public class Oauth2AuthenticationConfig extends SavedRequestAwareAuthenticationSuccessHandler {
 
-    @Autowired
-    private UserService userService;
-
-    // при успешной аутентификации сохраняем пользователя у нас, если такого ранее не было
-    // также, возвращаем на адрес, куда пользователь обращался перед аутентификацией
+    // возвращаем пользователя на адрес, куда пользователь обращался перед аутентификацией
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
-        UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
         super.onAuthenticationSuccess(request, response, authentication);
     }
 }
