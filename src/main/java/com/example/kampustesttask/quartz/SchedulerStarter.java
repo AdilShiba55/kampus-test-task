@@ -1,17 +1,17 @@
-package com.example.kampustesttask.config.quartz;
+package com.example.kampustesttask.quartz;
 
 import com.example.kampustesttask.service.SchedulerService;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 
-@Configuration
-public class TaskConfig {
+@Component
+public class SchedulerStarter {
 
     private static final int ONE_SECOND = 1000;
+    private static final int FIVE_SECONDS = ONE_SECOND * 5;
     private static final int ONE_MINUTE = ONE_SECOND * 1000;
     private static final int ONE_HOUR = 60 * ONE_MINUTE;
     private static final int ONE_DAY = 24 * ONE_HOUR;
@@ -21,12 +21,13 @@ public class TaskConfig {
 
     @PostConstruct
     private void init() throws SchedulerException {
-//        runReminderEmailJob();
+        runReminderEmailJob();
     }
 
     private void runReminderEmailJob() throws SchedulerException {
         QuartzTimeInfo quartzTimeInfo = new QuartzTimeInfo();
-        quartzTimeInfo.setRepeatInterval(ONE_MINUTE);
+        quartzTimeInfo.setRepeatInterval(FIVE_SECONDS);
+        quartzTimeInfo.setRunForever(true);
         schedulerService.schedule(ReminderEmailJob.class, quartzTimeInfo);
     }
 

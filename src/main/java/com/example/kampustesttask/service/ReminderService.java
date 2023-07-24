@@ -1,16 +1,15 @@
 package com.example.kampustesttask.service;
 
-import com.example.kampustesttask.config.quartz.QuartzTimeInfo;
-import com.example.kampustesttask.config.quartz.ReminderEmailJob;
 import com.example.kampustesttask.dto.ReminderSaveDTO;
 import com.example.kampustesttask.entity.Reminder;
 import com.example.kampustesttask.entity.User;
 import com.example.kampustesttask.exception.RecordNotFoundException;
 import com.example.kampustesttask.repository.ReminderRepository;
-import org.quartz.SchedulerException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class ReminderService {
@@ -47,9 +46,23 @@ public class ReminderService {
         reminderRepository.deleteById(reminderId);
     }
 
-    @Transactional
-    public void sendRemindNotification(Reminder reminder) {
+    public List<Reminder> getAllExpired() {
+        return reminderRepository.getAllExpired();
+    }
 
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void sendRemindNotification(Reminder reminder) {
+        String email = reminder.getUser().getEmail();
+        // отправляем сообщение на почту
+        emailService.sendMessage(email, reminder.getTitle(), reminder.getDescription());
+        // после отправки, удаляем запись с БД
+        reminderRepository.deleteById(reminder.getId());
+    }
+
+    @Transactional
+    public void sendRemindNotifications() {
+        List<Reminder> expired = getAllExpired();
+        expired.forEach(this::sendRemindNotification);
     }
 
 }

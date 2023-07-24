@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -37,6 +38,12 @@ class ReminderServiceTest {
     @Test
     void deleteById() {
         Assertions.assertDoesNotThrow(() -> reminderService.deleteById(UtTest.TEST_REMINDER_ID));
+    }
+
+    @Test
+    void getAllExpired() {
+        List<Reminder> expiredReminders = reminderService.getAllExpired();
+        Assertions.assertTrue(expiredReminders.size() > 0);
     }
 
     private ReminderSaveDTO getReminderSaveDTO() {

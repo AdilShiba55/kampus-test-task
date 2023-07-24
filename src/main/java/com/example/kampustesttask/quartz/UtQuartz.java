@@ -1,10 +1,8 @@
-package com.example.kampustesttask.config.quartz;
+package com.example.kampustesttask.quartz;
 
 import org.quartz.*;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public class UtQuartz {
 
