@@ -25,7 +25,7 @@ public class SchedulerStarter {
 
     private void runReminderEmailJob() throws SchedulerException {
         QuartzTimeInfo quartzTimeInfo = new QuartzTimeInfo();
-        quartzTimeInfo.setRepeatInterval(FIVE_SECONDS);
+        quartzTimeInfo.setRepeatInterval(ONE_MINUTE);
         quartzTimeInfo.setRunForever(true);
         schedulerService.schedule(ReminderEmailJob.class, quartzTimeInfo);
     }

@@ -8,7 +8,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.util.List;
 import java.util.Objects;
@@ -17,25 +16,25 @@ import java.util.stream.Collectors;
 @Service
 public class SchedulerService implements ApplicationContextAware {
 
+    private ApplicationContext applicationContext;
     private Scheduler scheduler;
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
+    }
+
+    public SchedulerService() {
         SchedulerFactory schedulerFactory = new StdSchedulerFactory();
         QuartzJobFactory jobFactory = new QuartzJobFactory(applicationContext);
         try {
             scheduler = schedulerFactory.getScheduler();
             scheduler.setJobFactory(jobFactory);
+            scheduler.start();
+            scheduler.getListenerManager().addTriggerListener(new QuartzTriggerListener(this));
         } catch (SchedulerException exception) {
             exception.printStackTrace();
         }
-    }
-
-    @PostConstruct
-    public void init() throws SchedulerException {
-
-        scheduler.start();
-        scheduler.getListenerManager().addTriggerListener(new QuartzTriggerListener(this));
     }
 
     @PreDestroy

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.scheduling.quartz.SpringBeanJobFactory;
 
+// без этого класса при выполнении задач не работает внедрение зависимостей
 public class QuartzJobFactory extends SpringBeanJobFactory {
 
     private transient AutowireCapableBeanFactory beanFactory;

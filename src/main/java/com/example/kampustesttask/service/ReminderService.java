@@ -5,6 +5,7 @@ import com.example.kampustesttask.entity.Reminder;
 import com.example.kampustesttask.entity.User;
 import com.example.kampustesttask.exception.RecordNotFoundException;
 import com.example.kampustesttask.repository.ReminderRepository;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,11 +15,13 @@ import java.util.List;
 @Service
 public class ReminderService {
 
+    private ReminderService self;
     private ReminderRepository reminderRepository;
     private UserService userService;
     private EmailService emailService;
 
-    public ReminderService(ReminderRepository reminderRepository, UserService userService, EmailService emailService) {
+    public ReminderService(@Lazy ReminderService self, ReminderRepository reminderRepository, UserService userService, EmailService emailService) {
+        this.self = self;
         this.reminderRepository = reminderRepository;
         this.userService = userService;
         this.emailService = emailService;
@@ -56,13 +59,13 @@ public class ReminderService {
         // отправляем сообщение на почту
         emailService.sendMessage(email, reminder.getTitle(), reminder.getDescription());
         // после отправки, удаляем запись с БД
-        reminderRepository.deleteById(reminder.getId());
+        deleteById(reminder.getId());
     }
 
     @Transactional
     public void sendRemindNotifications() {
         List<Reminder> expired = getAllExpired();
-        expired.forEach(this::sendRemindNotification);
+        expired.forEach(item -> self.sendRemindNotification(item));
     }
 
 }
