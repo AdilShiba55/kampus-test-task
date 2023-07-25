@@ -2,14 +2,16 @@ app:
   gmail:
     email: kampustesttask@gmail.com
     password: krzbtnmzihvzsrng
+  scheduler:
+    enabled: false
 
 server:
   port: 8080
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5430/kampus-test-task
+    url: jdbc:postgresql://localhost:5432/kampus-test-task
     username: postgres
-    password: postgres
+    password: 111
     driver-class-name: org.postgresql.Driver
   jpa:
     database: postgresql

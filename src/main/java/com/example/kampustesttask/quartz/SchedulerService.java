@@ -22,9 +22,10 @@ public class SchedulerService implements ApplicationContextAware {
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
+        init();
     }
 
-    public SchedulerService() {
+    private void init() {
         SchedulerFactory schedulerFactory = new StdSchedulerFactory();
         QuartzJobFactory jobFactory = new QuartzJobFactory(applicationContext);
         try {

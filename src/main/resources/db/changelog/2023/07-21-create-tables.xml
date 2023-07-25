@@ -30,7 +30,9 @@
             <column name="title" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="description" type="varchar(4096)"/>
+            <column name="description" type="varchar(4096)">
+                <constraints nullable="false"/>
+            </column>
             <column name="dt_remind" type="datetime">
                 <constraints nullable="false"/>
             </column>

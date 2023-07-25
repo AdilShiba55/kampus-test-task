@@ -31,7 +31,7 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .mvcMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                .mvcMatchers("/swagger-ui/**", "/v3/api-docs/**", "/api/test").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .oauth2Login(oc -> oc.userInfoEndpoint(ui -> ui

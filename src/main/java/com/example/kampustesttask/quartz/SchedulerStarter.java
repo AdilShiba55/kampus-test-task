@@ -2,6 +2,7 @@ package com.example.kampustesttask.quartz;
 
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -18,9 +19,14 @@ public class SchedulerStarter {
     @Autowired
     private SchedulerService schedulerService;
 
+    @Value("${app.scheduler.enabled}")
+    private Boolean schedulerEnabled;
+
     @PostConstruct
     private void init() throws SchedulerException {
-        runReminderEmailJob();
+        if(schedulerEnabled) {
+            runReminderEmailJob();
+        }
     }
 
     private void runReminderEmailJob() throws SchedulerException {
