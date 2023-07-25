@@ -1,6 +1,5 @@
 package com.example.kampustesttask.quartz;
 
-import com.example.kampustesttask.service.SchedulerService;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

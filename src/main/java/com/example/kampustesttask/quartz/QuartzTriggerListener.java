@@ -1,10 +1,8 @@
 package com.example.kampustesttask.quartz;
 
-import com.example.kampustesttask.service.SchedulerService;
 import lombok.SneakyThrows;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
-import org.quartz.SchedulerException;
 import org.quartz.Trigger;
 
 public class QuartzTriggerListener implements org.quartz.TriggerListener {

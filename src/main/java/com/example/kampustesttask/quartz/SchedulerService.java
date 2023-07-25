@@ -1,12 +1,11 @@
-package com.example.kampustesttask.service;
+package com.example.kampustesttask.quartz;
 
-import com.example.kampustesttask.quartz.QuartzTimeInfo;
-import com.example.kampustesttask.quartz.QuartzTriggerListener;
-import com.example.kampustesttask.quartz.ReminderEmailJob;
-import com.example.kampustesttask.quartz.UtQuartz;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 import org.quartz.impl.matchers.GroupMatcher;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -16,17 +15,25 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
-public class SchedulerService {
+public class SchedulerService implements ApplicationContextAware {
 
     private Scheduler scheduler;
 
-    public SchedulerService() throws SchedulerException {
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         SchedulerFactory schedulerFactory = new StdSchedulerFactory();
-       this.scheduler = schedulerFactory.getScheduler();
+        QuartzJobFactory jobFactory = new QuartzJobFactory(applicationContext);
+        try {
+            scheduler = schedulerFactory.getScheduler();
+            scheduler.setJobFactory(jobFactory);
+        } catch (SchedulerException exception) {
+            exception.printStackTrace();
+        }
     }
 
     @PostConstruct
     public void init() throws SchedulerException {
+
         scheduler.start();
         scheduler.getListenerManager().addTriggerListener(new QuartzTriggerListener(this));
     }
