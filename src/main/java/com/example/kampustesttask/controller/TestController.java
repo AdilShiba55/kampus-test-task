@@ -12,8 +12,6 @@ public class TestController {
 
     @GetMapping("/test")
     public String test() {
-        Long userId = UtAuthorization.getUserId();
-        String email = UtAuthorization.getUserEmail();
         return "test";
     }
 
