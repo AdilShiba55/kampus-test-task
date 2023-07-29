@@ -33,7 +33,6 @@ public class OidcUserConfig extends OidcUserService {
         UserPrincipal userPrincipal = new UserPrincipal();
         userPrincipal.setId(userId);
         userPrincipal.setToken(oidcUser.getIdToken().getTokenValue());
-        userPrincipal.setName(oidcUser.getGivenName());
         userPrincipal.setEmail(oidcUser.getEmail());
 
         return userPrincipal;

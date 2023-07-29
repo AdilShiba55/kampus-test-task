@@ -1,3 +1,10 @@
+app:
+  gmail:
+    email: kampustesttask@gmail.com
+    password: krzbtnmzihvzsrng
+  scheduler:
+    enabled: false
+
 server:
   port: 8080
 spring:
@@ -16,40 +23,15 @@ spring:
     oauth2:
       client:
         registration:
-          keycloak:
-            client-id: test-client
-            authorization-grant-type: authorization_code
-            scope: openid
-        provider:
-          keycloak:
-              issuer-uri: http://localhost:8083/realms/test-realm
-              user-name-attribute: adilb
+          google:
+            client-id: 29617503142-1r4junhf1v46vk4t5r2p52ikrj8pilae.apps.googleusercontent.com
+            client-secret: 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
       resourceserver:
         jwt:
-          issuer-uri: ${spring.security.oauth2.client.provider.keycloak.issuer-uri}
-          jwk-set-uri: ${spring.security.oauth2.client.provider.keycloak.issuer-uri}/protocol/openid-connect/certs
+          issuer-uri: https://accounts.google.com
+          jwk-set-uri: https://www.googleapis.com/oauth2/v3/certs
   quartz:
     job-store-type: jdbc
     jdbc:
       initialize-schema: always
-app:
-  gmail:
-    email: kampustesttask@gmail.com
-    password: krzbtnmzihvzsrng
-  scheduler:
-    enabled: false
-
-### Keycloak configs
-keycloak:
-  auth-server-url: http://localhost:8083
-  realm: test-realm
-  resource: test-client
-  public-client: true
-  credentials:
-    secret: 2pxLls46maxNJYEOAjcFRg72XzVnemIa
-keycloak-master:
-  realm: master
-  client-id: admin-clie
-  username: admin
-  password: admin
 

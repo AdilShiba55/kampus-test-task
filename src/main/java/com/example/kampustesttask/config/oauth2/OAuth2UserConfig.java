@@ -29,7 +29,6 @@ public class OAuth2UserConfig extends DefaultOAuth2UserService {
         UserPrincipal userPrincipal = new UserPrincipal();
         userPrincipal.setId(userId);
         userPrincipal.setToken(userRequest.getAccessToken().getTokenValue());
-        userPrincipal.setName(name);
         userPrincipal.setEmail(email);
 
         return userPrincipal;
