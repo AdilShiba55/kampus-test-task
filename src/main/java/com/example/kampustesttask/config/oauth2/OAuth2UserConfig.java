@@ -30,6 +30,7 @@ public class OAuth2UserConfig extends DefaultOAuth2UserService {
         userPrincipal.setId(userId);
         userPrincipal.setToken(userRequest.getAccessToken().getTokenValue());
         userPrincipal.setEmail(email);
+        userPrincipal.setGithub(true);
 
         return userPrincipal;
     }

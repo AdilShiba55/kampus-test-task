@@ -26,6 +26,10 @@ spring:
           google:
             client-id: 29617503142-1r4junhf1v46vk4t5r2p52ikrj8pilae.apps.googleusercontent.com
             client-secret: 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
+            jwk-uri: https://www.googleapis.com/oauth2/v3/certs
+          github:
+            client-id: ec90ca6e817205a0772e
+            client-secret: 3ff47cd100a0e60a7b12aada38bae7ab5957f40b
       resourceserver:
         jwt:
           issuer-uri: https://accounts.google.com

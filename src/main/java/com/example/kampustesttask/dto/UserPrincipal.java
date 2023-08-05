@@ -16,6 +16,8 @@ public class UserPrincipal implements OidcUser {
     private String token;
     private Long id;
     private String email;
+    private boolean isGoogle;
+    private boolean isGithub;
 
 
     @Override

@@ -34,6 +34,7 @@ public class OidcUserConfig extends OidcUserService {
         userPrincipal.setId(userId);
         userPrincipal.setToken(oidcUser.getIdToken().getTokenValue());
         userPrincipal.setEmail(oidcUser.getEmail());
+        userPrincipal.setGoogle(true);
 
         return userPrincipal;
     }
